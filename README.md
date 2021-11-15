@@ -9,7 +9,7 @@ RESTful API for a library management application
 * Add a Book
 * List Books
 * Edit details of a Book
-* Add a book to a category
+* Add books to a category
 * Delete a book
 
 ## Setup Configuration
