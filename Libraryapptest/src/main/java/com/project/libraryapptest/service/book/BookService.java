@@ -14,7 +14,7 @@ public interface BookService {
 
     Book getBook(long id) throws BadRequestException;
 
-    Book addBook(Book bookDetails, long categoryId) throws BadRequestException;
+    Book addBook(Book bookDetails) throws BadRequestException;
 
     Book updateBook(Book bookDetails, long id) throws BadRequestException;
 

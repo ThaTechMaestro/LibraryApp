@@ -18,9 +18,11 @@ public class ApiErrorResponse {
     private int errorCode;
     private String error;
 
-    public ApiErrorResponse(boolean status, String message, int errorCode) {
+    public ApiErrorResponse(boolean status, String message, int errorCode,Object data) {
         this.status = status;
         this.message = message;
         this.errorCode = errorCode;
+        this.data = data;
+
     }
 }

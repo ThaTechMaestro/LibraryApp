@@ -11,4 +11,6 @@ import java.util.List;
 public interface CategoryService {
 
     List<Category> getAllCategories() throws BadRequestException;
+
+    Category addCategory(Category categoryDetails) throws BadRequestException;
 }

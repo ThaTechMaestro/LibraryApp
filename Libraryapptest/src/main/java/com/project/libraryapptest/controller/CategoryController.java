@@ -5,10 +5,11 @@ import com.project.libraryapptest.exception.BadRequestException;
 import com.project.libraryapptest.model.Book;
 import com.project.libraryapptest.model.Category;
 import com.project.libraryapptest.service.category.CategoryService;
+import com.project.libraryapptest.utils.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,9 +20,19 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/category")
+    @GetMapping("/categories")
     public List<Category> getAllCategories() throws BadRequestException {
 
         return categoryService.getAllCategories();
+    }
+
+    @PostMapping("/categories")
+    public ResponseEntity<ApiResponse> addCategories(@RequestBody Category categoryDetails) throws BadRequestException {
+
+        categoryService.addCategory(categoryDetails);
+        ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Category Created Successfully", categoryDetails);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+
     }
 }

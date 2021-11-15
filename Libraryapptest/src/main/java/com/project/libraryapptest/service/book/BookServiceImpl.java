@@ -20,7 +20,7 @@ public class BookServiceImpl implements BookService{
     @Autowired
     CategoryRepository categoryRepository;
 
-    // Fe
+
     @Override
     public List<Book> getAllBooks() throws BadRequestException {
         return bookRepository.findAll();
@@ -32,18 +32,14 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book addBook(Book bookDetails, long categoryId) throws BadRequestException {
+    public Book addBook(Book bookDetails) throws BadRequestException {
 
-        Optional <Category> value = categoryRepository.findById(categoryId);
-
-        value.ifPresent(bookDetails::setCategory);
-        bookRepository.save(bookDetails);
-
-        return bookDetails;
+       return bookRepository.save(bookDetails);
     }
 
     @Override
     public Book updateBook(Book bookDetails, long id) throws BadRequestException {
+
         Book book = bookRepository.findById(id).get();
         book.setTitle(bookDetails.getTitle());
         book.setAuthors(bookDetails.getAuthors());

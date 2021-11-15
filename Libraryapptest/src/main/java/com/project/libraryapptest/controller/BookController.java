@@ -32,27 +32,29 @@ public class BookController {
         return bookService.getBook(id);
     }
 
-    // Adding a category to a book
-    @PostMapping("/books/{categoryId}")
-    public ResponseEntity<ApiResponse> addNewBook(@RequestBody Book bookDetails, @PathVariable long categoryId) throws BadRequestException{
+    // Add a Book
+    @PostMapping("/books")
+    public ResponseEntity<ApiResponse> addNewBook(@RequestBody Book bookDetails) throws BadRequestException{
 
-        bookService.addBook(bookDetails, categoryId);
-        ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Book Created Successfully");
+        bookService.addBook(bookDetails);
+        ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Book Created Successfully", bookDetails);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
+    // Update Book Details
     @PutMapping("/books/{id}")
-    public ResponseEntity<ApiResponse> updateBook(@PathVariable long id, @RequestBody Book bookDetails) throws BadRequestException{
+    public ResponseEntity<ApiResponse> updateBook(@RequestBody Book bookDetails, @PathVariable long id) throws BadRequestException{
 
         bookService.updateBook(bookDetails, id);
-        ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Book Details Updated Successfully");
+        ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Book Details Updated Successfully", bookDetails);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
+    // Delete a particular book
     @DeleteMapping("/books/{id}")
-    public ResponseEntity<ApiResponse> updateBook(@PathVariable long id) throws BadRequestException{
+    public ResponseEntity<ApiResponse> deleteBook(@PathVariable long id) throws BadRequestException{
 
         bookService.deleteBook(id);
         ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Book Deleted Successfully");
@@ -60,11 +62,26 @@ public class BookController {
 
     }
 
+    // Get all the books in a category
     @GetMapping("/books/category/{id}")
     public List<Book> getBooksByCategory(@PathVariable long id) throws BadRequestException {
 
         return bookService.getBooksByCategory(id);
     }
+
+    // Add Books to a category
+    @PutMapping("/books/{bookId}/{categoryId}")
+    public ResponseEntity<ApiResponse> updateBooksByCategory(@PathVariable long bookId, @PathVariable long categoryId) throws BadRequestException {
+
+        bookService.updateBookByCategory(bookId, categoryId);
+
+        ApiResponse response = new ApiResponse(HttpStatus.OK.value(),true, "Book category added Successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+
+
 
 
 

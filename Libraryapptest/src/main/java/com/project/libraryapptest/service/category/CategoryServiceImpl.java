@@ -19,4 +19,11 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getAllCategories() throws BadRequestException {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public Category addCategory(Category categoryDetails) throws BadRequestException {
+        System.out.println(categoryDetails);
+        categoryRepository.save(categoryDetails);
+        return categoryDetails;
+    }
 }
