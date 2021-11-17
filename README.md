@@ -17,6 +17,7 @@ RESTful API for a library management application
 * You may update the database name, username, and password in the file application via 'application.properties' in the resources folder. 
 * Run application locally and ensure succesful connection to the local mysql db
 
+## Testing the Developed Application
 ### Action: Add a category
 * Adding a category named Programming Languages
 
